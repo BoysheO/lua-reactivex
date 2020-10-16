@@ -1,9 +1,9 @@
-local Rx = require 'rx'
-local scheduler = Rx.CooperativeScheduler.create()
+local rx = require("reactivex")
+local scheduler = rx.CooperativeScheduler.create()
 
 -- Cheer someone on using functional reactive programming
 
-local observable = Rx.Observable.fromCoroutine(function()
+local observable = rx.Observable.fromCoroutine(function()
   for i = 2, 8, 2 do
     coroutine.yield(i)
   end

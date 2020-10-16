@@ -1,5 +1,4 @@
 language: python
-sudo: required
 dist: trusty
 
 # Using cache to pass artifacts between stages
@@ -39,7 +38,7 @@ install:
   - luarocks show reactivex
   - luarocks show luacov-coveralls
 
-after_install:
+before_script:
   - echo $CACHE_NAME
   - echo $TRAVIS_BUILD_ID
   - echo $TRAVIS_TAG
@@ -148,7 +147,7 @@ jobs:
       file:
       - lua-reactivex-portable.zip
       - lua-reactivex-portable-luvit.zip
-      skip_cleanup: true
+      cleanup: false
       on:
         repo: 4O4/lua-reactivex
         tags: true

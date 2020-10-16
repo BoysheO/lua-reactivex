@@ -144,7 +144,7 @@ jobs:
     deploy: &releases
       provider: releases
       api_key:
-        secure: YOUR_ENCRYPTED_API_KEY_HERE
+        secure: Jz+b7md6hJjz2zPcyQKkJwHR9WhrADDxrUQMZdYbvIM7Y5WlWkgmWBGYt3fPvye4klNeyRs0IciFd0eDknkWMB/Yi6iHuazEpHZTL8yk/iikbZT/O+rvYW/AXCpXMN/p2xFllFmhAUijNUTmAhYsqbGUZR07HifHrd4Eed4IbgNXgh584nA1LAwsJ+qhi8hq/GsyK60+sM43qgPVRmnqz/VCKDREaZ+J6t+z/DULg6yX3U1etS/uLfAiKKVwAI11pBswbxl8aN0hJAPDlH+ytIwyYWM6nBUKKMFO8LkXDUYVnkq/7evTwEiCMxaqdLneKLoCDcMaDQR2Fb/addBtFps/zljW3/+taaGpdJ3tNRh0Yq0RMV1Xckw9yAtAJtbSmC/xq8KF8zHAJovAGAchZF9X7kxOm4B0oaDaSU5DmTpsgqihTuIfrueB/qJ/vo2Hdc0amTuox/V7+K9qO/9HVTSeyCC3VECeCXlnJ/wPaLHyc5DyVOHULaGW5GcP7Jgv8NEnZi5AQE/+60XuL+iOviVR16V0RycwCe7Kfioj1U366INIYQVlfqmPGRk0IgUPAxVoVZpLMtHoth+7XteENWU+vo7Oo0QFcn3nwwILayD7MwGexi0lSbtrf44bAGXxBwLJIpe9DS4E+UGh1OnF++mGXESZ+d5T9DsL9P2c4Kw=
       file:
       - lua-reactivex-portable.zip
       - lua-reactivex-portable-luvit.zip

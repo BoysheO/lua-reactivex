@@ -1,5 +1,4 @@
-Lua-ReactiveX [![Build Status](https://travis-ci.org/4O4/lua-reactivex.svg)](https://travis-ci.org/4O4/lua-reactivex) [![Coverage Status](https://coveralls.io/repos/github/4O4/lua-reactivex/badge.svg?branch=master)](https://coveralls.io/github/4O4/lua-reactivex?branch=master)
-===
+# Lua-ReactiveX [![Build Status](https://travis-ci.org/4O4/lua-reactivex.svg)](https://travis-ci.org/4O4/lua-reactivex) [![Coverage Status](https://coveralls.io/repos/github/4O4/lua-reactivex/badge.svg?branch=master)](https://coveralls.io/github/4O4/lua-reactivex?branch=master)
 
 [Reactive Extensions](http://reactivex.io) for Lua.
 
@@ -9,10 +8,9 @@ This is a friendly fork of [RxLua](https://github.com/bjornbytes/RxLua). All cre
 
 This fork includes some fixes and features contributed by the community. There are also foundational changes here in order to introduce a proper automatic unsubscription mechanism which was missing and caused unexpected behavior in some cases. These changes are heavily inspired by the RxJS internals, and thus RxJS is considered a reference implementation for all future development of Lua-ReactiveX.
 
-Getting Started
----
+## Getting Started
 
-#### Lua
+### Lua
 
 Install with luarocks:
 
@@ -26,7 +24,7 @@ Or download a portable package from the Releases page, and extract `reactivex.lu
 local rx = require("reactivex")
 ```
 
-#### Luvit
+### Luvit
 
 Install using `lit`:
 
@@ -40,12 +38,11 @@ Then require it:
 local rx = require("reactivex")
 ```
 
-#### Love2D
+### Love2D
 
 See [RxLove](https://github.com/bjornbytes/RxLove). 
 
-Example Usage
----
+## Example Usage
 
 Use ReactiveX to construct a simple cheer:
 
@@ -63,15 +60,13 @@ rx.Observable.fromRange(1, 8)
 
 See [examples](examples) for more.
 
-Resources
----
+## Resources
 
 - [Documentation](doc)
 - [Contributor Guide](doc/CONTRIBUTING.md)
 - [ReactiveX Introduction](http://reactivex.io/intro.html)
 
-Tests
----
+## Tests
 
 Uses [lust](https://github.com/bjornbytes/lust). Run with:
 
@@ -85,7 +80,6 @@ or, to run a specific test:
 lua tests/runner.lua skipUntil
 ```
 
-License
----
+## License
 
 [MIT](LICENSE)

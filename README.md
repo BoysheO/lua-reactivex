@@ -1,25 +1,29 @@
-RxLua [![Build Status](https://travis-ci.org/bjornbytes/RxLua.svg)](https://travis-ci.org/bjornbytes/RxLua) [![Coverage Status](https://coveralls.io/repos/github/bjornbytes/RxLua/badge.svg?branch=master)](https://coveralls.io/github/bjornbytes/RxLua?branch=master)
+Lua-ReactiveX [![Build Status](https://travis-ci.org/4O4/lua-reactivex.svg)](https://travis-ci.org/4O4/lua-reactivex) [![Coverage Status](https://coveralls.io/repos/github/4O4/lua-reactivex/badge.svg?branch=master)](https://coveralls.io/github/4O4/lua-reactivex?branch=master)
 ===
 
 [Reactive Extensions](http://reactivex.io) for Lua.
 
-RxLua gives Lua the power of Observables, which are data structures that represent a stream of values that arrive over time.  They're very handy when dealing with events, streams of data, asynchronous requests, and concurrency.
+Lua-ReactiveX gives Lua the power of Observables, which are data structures that represent a stream of values that arrive over time. They're very handy when dealing with events, streams of data, asynchronous requests, and concurrency.
+
+This is a friendly fork of [RxLua](https://github.com/bjornbytes/RxLua). All credits for initial development go to the original author, [bjornbytes](https://github.com/bjornbytes).
+
+This fork includes some fixes and features contributed by the community. There are also foundational changes here in order to introduce a proper automatic unsubscription mechanism which was missing and caused unexpected behavior in some cases. These changes are heavily inspired by the RxJS internals, and thus RxJS is considered a reference implementation for all future development of Lua-ReactiveX.
 
 Getting Started
 ---
 
 #### Lua
 
-Copy the `rx.lua` file into your project and require it:
-
-```lua
-local rx = require 'rx'
-```
-
-You can also install RxLua using luarocks:
+Install with luarocks:
 
 ```sh
-luarocks install bjornbytes/rxlua
+luarocks install reactivex
+```
+
+Or download a portable package from the Releases page, and extract `reactivex.lua` file into your project. Then simply require it:
+
+```lua
+local rx = require("reactivex")
 ```
 
 #### Luvit
@@ -27,30 +31,30 @@ luarocks install bjornbytes/rxlua
 Install using `lit`:
 
 ```sh
-lit install bjornbytes/rx
+lit install 4O4/reactivex
 ```
 
 Then require it:
 
 ```lua
-local rx = require 'rx'
+local rx = require("reactivex")
 ```
 
 #### Love2D
 
-See [RxLove](https://github.com/bjornbytes/RxLove).
+See [RxLove](https://github.com/bjornbytes/RxLove). 
 
 Example Usage
 ---
 
-Use RxLua to construct a simple cheer:
+Use ReactiveX to construct a simple cheer:
 
 ```lua
-local Rx = require 'rx'
+local rx = require("reactivex")
 
-Rx.Observable.fromRange(1, 8)
+rx.Observable.fromRange(1, 8)
   :filter(function(x) return x % 2 == 0 end)
-  :concat(Rx.Observable.of('who do we appreciate'))
+  :concat(rx.Observable.of('who do we appreciate'))
   :map(function(value) return value .. '!' end)
   :subscribe(print)
 
@@ -64,7 +68,7 @@ Resources
 
 - [Documentation](doc)
 - [Contributor Guide](doc/CONTRIBUTING.md)
-- [Rx Introduction](http://reactivex.io/intro.html)
+- [ReactiveX Introduction](http://reactivex.io/intro.html)
 
 Tests
 ---
@@ -84,4 +88,4 @@ lua tests/runner.lua skipUntil
 License
 ---
 
-MIT, see [`LICENSE`](LICENSE) for details.
+[MIT](LICENSE)

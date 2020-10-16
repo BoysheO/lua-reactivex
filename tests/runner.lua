@@ -1,5 +1,5 @@
 lust = require 'tests/lust'
-Rx = require 'rx'
+Rx = require 'reactivex'
 
 for _, fn in pairs({'describe', 'it', 'test', 'expect', 'spy', 'before', 'after'}) do
   _G[fn] = lust[fn]

@@ -2,7 +2,7 @@ local docroc = require 'tools/docroc'
 
 io.output('doc/README.md')
 
-io.write('RxLua\n===\n\n')
+io.write('Lua-ReactiveX\n===\n\n')
 
 local comments = docroc.process('rx.lua')
 

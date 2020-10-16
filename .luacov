@@ -1,5 +1,8 @@
-modules =
-{
-   ["rx"] = "rx.lua",
-   ["rx.*"] = "src"
+include = {
+   ".*/.hererocks/share/lua/[^/]+/reactivexrx"
+}
+coveralls = {
+   pathcorrect = {
+      {".*/.hererocks/share/lua/[^/]+/reactivex", "reactivex"};
+   },
 }

@@ -1,11 +1,11 @@
-local Rx = require 'rx'
+local rx = require("reactivex")
 
-local first = Rx.Observable.fromRange(3)
-local second = Rx.Observable.fromRange(4, 6)
-local third = Rx.Observable.fromRange(7, 11, 2)
+local first = rx.Observable.fromRange(3)
+local second = rx.Observable.fromRange(4, 6)
+local third = rx.Observable.fromRange(7, 11, 2)
 
-first:concat(second, third):dump('concat')
+first:concat(second, third):dump("concat")
 
-print('Equivalent to:')
+print("Equivalent to:")
 
-Rx.Observable.concat(first, second, third):dump('concat')
+rx.Observable.concat(first, second, third):dump("concat")

@@ -1,11 +1,11 @@
-local Rx = require 'rx'
-local scheduler = Rx.CooperativeScheduler.create()
+local rx = require("reactivex")
+local scheduler = rx.CooperativeScheduler.create()
 local timerResolution = .25
 local function log(message)
   print('[' .. string.format('%.2f', scheduler.currentTime) .. '] ' .. message)
 end
 
--- Demonstrate Rx.Scheduler.Cooperative by running some simultaneous cooperative threads.
+-- Demonstrate rx.Scheduler.Cooperative by running some simultaneous cooperative threads.
 scheduler:schedule(function()
   log('this is like a setTimeout')
 end, 2)

@@ -5,26 +5,26 @@
 --
 -- @usage lua tools/build.lua
 
-local VERSION = os.getenv("RXLUA_VERSION") or "0.0.1"
+local VERSION = os.getenv("LUA_REACTIVEX_VERSION") or "0.1.0"
 
 local MAIN = [[
-return require('rx.init')
+return require('reactivex.init')
 ]]
 
 local HEADER = [[
--- RxLua v]] .. VERSION .. [[ (Portable single-file build)
--- https://github.com/bjornbytes/rxlua
+-- Lua-ReactiveX v]] .. VERSION .. [[ (Portable single-file build)
+-- https://github.com/4O4/lua-reactivex
 -- MIT License
 
 ]]
 
 local LUVIT_METADATA = [[
-exports.name = 'bjornbytes/rx'
+exports.name = '4O4/lua-reactivex'
 exports.version = ']] .. VERSION .. [['
-exports.description = 'Reactive Extensions for Lua'
+exports.description = 'Reactive Extensions for Lua (fork of RxLua)'
 exports.license = 'MIT'
-exports.author = { url = 'https://github.com/bjornbytes' }
-exports.homepage = 'https://github.com/bjornbytes/rxlua'
+exports.author = { url = 'https://github.com/4O4' }
+exports.homepage = 'https://github.com/4O4/lua-reactivex'
 
 ]]
 
@@ -36,10 +36,10 @@ function withFile(path, opts, doCallback)
 end
 
 for _, path in ipairs({
-  ".tmp/rxlua-portable-luvit/rx.lua",
-  ".tmp/rxlua-portable/rx.lua",
-  ".tmp/rxlua-portable-luvit",
-  ".tmp/rxlua-portable",
+  ".tmp/lua-reactivex-portable-luvit/reactivex.lua",
+  ".tmp/lua-reactivex-portable/reactivex.lua",
+  ".tmp/lua-reactivex-portable-luvit",
+  ".tmp/lua-reactivex-portable",
   ".tmp/main.lua",
   ".tmp/out.lua",
   ".tmp",
@@ -48,7 +48,7 @@ do
   os.remove(path)
 end
 
-os.execute("mkdir .tmp .tmp/rxlua-portable-luvit .tmp/rxlua-portable")
+os.execute("mkdir .tmp .tmp/lua-reactivex-portable-luvit .tmp/lua-reactivex-portable")
 
 withFile(".tmp/main.lua", "w", function (file)
   file:write(MAIN)
@@ -63,11 +63,11 @@ withFile(".tmp/out.lua", "r", function (file)
   amalgOut = file:read("*a")
 end)
 
-withFile(".tmp/rxlua-portable/rx.lua", "w", function (file)
+withFile(".tmp/lua-reactivex-portable/reactivex.lua", "w", function (file)
   file:write(table.concat({HEADER, amalgOut}, ""))
 end)
 
-withFile(".tmp/rxlua-portable-luvit/rx.lua", "w", function (file)
+withFile(".tmp/lua-reactivex-portable-luvit/reactivex.lua", "w", function (file)
   file:write(table.concat({HEADER, LUVIT_METADATA, amalgOut}, ""))
 end)
 

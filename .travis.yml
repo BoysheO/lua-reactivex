@@ -19,7 +19,7 @@ stages:
 
 env:
   global:
-    - RXLUA_VERSION=$(echo -n ${TRAVIS_TAG} | sed 's/[^0-9.]//gi')
+    - LUA_REACTIVEX_VERSION=$(echo -n ${TRAVIS_TAG} | sed 's/[^0-9.]//gi')
     - CACHE_NAME=$TRAVIS_BUILD_ID
   matrix:
     - LUA="lua 5.1"
@@ -36,14 +36,14 @@ before_install:
 install:
   - luarocks make
   - luarocks install luacov-coveralls
-  - luarocks show rxlua
+  - luarocks show reactivex
   - luarocks show luacov-coveralls
 
 after_install:
   - echo $CACHE_NAME
   - echo $TRAVIS_BUILD_ID
   - echo $TRAVIS_TAG
-  - echo $RXLUA_VERSION
+  - echo $LUA_REACTIVEX_VERSION
 
 script:
   - lua -v
@@ -62,17 +62,17 @@ jobs:
       - source .hererocks/bin/activate
     install: 
       - luarocks make
-      - luarocks show rxlua
+      - luarocks show reactivex
       - rm -rf ~/cache/*
       - echo $TRAVIS_BUILD_ID > ~/cache/travis_build_id
       - lua -v 
       - lua tools/build.lua
-      - cp README.md LICENSE .tmp/rxlua-portable
-      - cp README.md LICENSE .tmp/rxlua-portable-luvit
-      - cd .tmp/rxlua-portable
-      - zip ~/cache/rxlua-portable.zip *
-      - cd ../rxlua-portable-luvit
-      - zip ~/cache/rxlua-portable-luvit.zip *
+      - cp README.md LICENSE .tmp/lua-reactivex-portable
+      - cp README.md LICENSE .tmp/lua-reactivex-portable-luvit
+      - cd .tmp/lua-reactivex-portable
+      - zip ~/cache/lua-reactivex-portable.zip *
+      - cd ../lua-reactivex-portable-luvit
+      - zip ~/cache/lua-reactivex-portable-luvit.zip *
     script:
       - ls ~/cache
       - echo $CACHE_NAME
@@ -100,13 +100,13 @@ jobs:
       - mkdir test-portable test-portable-luvit
       - cp -r ../tests test-portable
       - cp -r ../tests test-portable-luvit    
-      - cp ~/cache/rxlua-portable.zip test-portable
-      - cp ~/cache/rxlua-portable-luvit.zip test-portable-luvit
+      - cp ~/cache/lua-reactivex-portable.zip test-portable
+      - cp ~/cache/lua-reactivex-portable-luvit.zip test-portable-luvit
       - cd test-portable
-      - unzip rxlua-portable.zip
+      - unzip reactivex-portable.zip
       - lua tests/runner.lua
       - cd ../test-portable-luvit
-      - unzip rxlua-portable-luvit.zip
+      - unzip reactivex-portable-luvit.zip
       # emulate luvit environment with global `exports` table
       - echo 'exports = {} dofile("tests/runner.lua")' | lua -
     script:
@@ -135,8 +135,8 @@ jobs:
     env:
     install: 
       - if test "$TRAVIS_BUILD_ID" != $(cat ~/cache/travis_build_id); then travis_terminate 1; fi
-      - cp ~/cache/rxlua-portable.zip .
-      - cp ~/cache/rxlua-portable-luvit.zip .
+      - cp ~/cache/lua-reactivex-portable.zip .
+      - cp ~/cache/lua-reactivex-portable-luvit.zip .
       - mv ~/cache ~/cache-discard
       - mkdir ~/cache # clear the cache
     script:
@@ -146,9 +146,9 @@ jobs:
       api_key:
         secure: YOUR_ENCRYPTED_API_KEY_HERE
       file:
-      - rxlua-portable.zip
-      - rxlua-portable-luvit.zip
+      - lua-reactivex-portable.zip
+      - lua-reactivex-portable-luvit.zip
       skip_cleanup: true
       on:
-        repo: YOUR_USERNAME_HERE/RxLua
+        repo: 4O4/lua-reactivex
         tags: true

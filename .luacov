@@ -1,8 +1,8 @@
 include = {
-   ".*/.hererocks/share/lua/[^/]+/rx"
+   ".*/.hererocks/share/lua/[^/]+/reactivexrx"
 }
 coveralls = {
    pathcorrect = {
-      {".*/.hererocks/share/lua/[^/]+/rx", "src"};
+      {".*/.hererocks/share/lua/[^/]+/reactivex", "reactivex"};
    },
 }

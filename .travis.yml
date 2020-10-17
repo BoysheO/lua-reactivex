@@ -109,8 +109,8 @@ jobs:
       - echo 'require("reactivex"); dofile("tests/runner.lua")' | lua -
       - cd ../test-portable-luvit
       - unzip lua-reactivex-portable-luvit.zip
-      # emulate luvit environment with global `exports` table
-      - echo 'exports = {} dofile("tests/runner.lua")' | lua -
+      # same trick with `require()` caches + emulate luvit environment with global `exports` table
+      - echo 'require("reactivex"); exports = {}; dofile("tests/runner.lua")' | lua -
     script:
       - true
   - <<: *test-portable-releases

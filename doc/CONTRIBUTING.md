@@ -21,9 +21,12 @@ When a tag is published in this repository, these steps are done automatically o
 > **Note:** This is not a direct file-by-file concatenation, but rather an *amalgamation*. The resulting code will populate the cache of the `require()` by adding entries to `package.preload`. Using `lua-amalg` is required because the old build script could not handle circular dependencies very well as it was just concatenating all files into one big script.
 
 ### Documentation
+
 The documentation in `doc/README.md` is automatically generated based on comments in the source. `tools/update_documentation.lua` script performs this generation. Internally it uses `docroc`, which is a library that parses Lua comments and returns them in a table. When its done, `update_documentation.lua` converts the table to markdown and writes it to the `doc` directory.
 
 You should run this script and include an updated `doc/README.md` as part of a pull request.
+
+> **Note:** For convienience, `lfs` module is used in this script to dynamically get list of source files from disk. In order to use the `update_documentation.lua` you must first install LuaFileSystem with `luarocks install luafilesystem`
 
 ## Tests
 
@@ -43,6 +46,7 @@ However, the tests are not a documentation nor example of the usage. They should
 - Not following the last two rules will result in coverage leaks (coverage measurements will be higher than they are in reality).
 
 ### Test tooling
+
 We're using [lust](https://github.com/bjornbytes/lust) for testing.
 
 To run the tests, run this command in the root directory of the project:

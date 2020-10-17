@@ -4,12 +4,22 @@
 
 local docroc = {}
 
+-- alias for compatibility
 function docroc.process(filename)
+  return docroc.process_file(filename)
+end
+
+function docroc.process_file(filename)
   local file = io.open(filename, 'r')
   local text = file:read('*a')
   file:close()
 
+  return docroc.process_text(text)
+end
+
+function docroc.process_text(text)
   local comments = {}
+
   text:gsub('%s*%-%-%-(.-)\n([%w\n][^\n%-]*)', function(chunk, context)
     chunk = chunk:gsub('^%s*%-*%s*', ''):gsub('\n%s*%-*%s*', ' ')
     chunk = chunk:gsub('^[^@]', '@description %1')

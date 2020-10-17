@@ -101,11 +101,13 @@ jobs:
       - cp -r ../tests test-portable-luvit    
       - cp ~/cache/lua-reactivex-portable.zip test-portable
       - cp ~/cache/lua-reactivex-portable-luvit.zip test-portable-luvit
+      - ls -la test-portable
+      - ls -la test-portable-luvit
       - cd test-portable
-      - unzip reactivex-portable.zip
+      - unzip lua-reactivex-portable.zip
       - lua tests/runner.lua
       - cd ../test-portable-luvit
-      - unzip reactivex-portable-luvit.zip
+      - unzip lua-reactivex-portable-luvit.zip
       # emulate luvit environment with global `exports` table
       - echo 'exports = {} dofile("tests/runner.lua")' | lua -
     script:

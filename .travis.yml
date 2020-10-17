@@ -139,8 +139,8 @@ jobs:
       - true
     install: 
       - if test "$TRAVIS_BUILD_ID" != $(cat ~/cache/travis_build_id); then travis_terminate 1; fi
-      - cp ~/cache/lua-reactivex-portable.zip lua-reactivex-portable-${TRAVIS_BUILD_ID}.zip
-      - cp ~/cache/lua-reactivex-portable-luvit.zip lua-reactivex-portable-luvit-${TRAVIS_BUILD_ID}.zip
+      - cp ~/cache/lua-reactivex-portable.zip lua-reactivex-portable-v${LUA_REACTIVEX_VERSION}.zip
+      - cp ~/cache/lua-reactivex-portable-luvit.zip lua-reactivex-portable-luvit-v${LUA_REACTIVEX_VERSION}.zip
       - mv ~/cache ~/cache-discard # clear the cache
       - mkdir ~/cache # clear the cache
     before_script:

@@ -1,175 +1,113 @@
-RxLua
-===
+# Lua-ReactiveX
 
-- [Subscription](#subscription)
-  - [create](#createaction)
-  - [unsubscribe](#unsubscribe)
-- [Observer](#observer)
-  - [create](#createonnext-onerror-oncompleted)
-  - [onNext](#onnextvalues)
-  - [onError](#onerrormessage)
-  - [onCompleted](#oncompleted)
 - [Observable](#observable)
-  - [create](#createsubscribe)
-  - [subscribe](#subscribeonnext-onerror-oncompleted)
-  - [empty](#empty)
-  - [never](#never)
-  - [throw](#throwmessage)
-  - [of](#ofvalues)
-  - [fromRange](#fromrangeinitial-limit-step)
-  - [fromTable](#fromtabletable-iterator-keys)
-  - [fromCoroutine](#fromcoroutinefn)
-  - [fromFileByLine](#fromfilebylinefilename)
-  - [defer](#deferfactory)
-  - [replicate](#replicatevalue-count)
-  - [dump](#dumpname-formatter)
-  - [all](#allpredicate)
-  - [amb](#ambobservables)
-  - [average](#average)
-  - [buffer](#buffersize)
-  - [catch](#catchhandler)
-  - [combineLatest](#combinelatestobservables-combinator)
-  - [compact](#compact)
-  - [concat](#concatsources)
-  - [contains](#containsvalue)
-  - [count](#countpredicate)
-  - [debounce](#debouncetime-scheduler)
-  - [defaultIfEmpty](#defaultifemptyvalues)
-  - [delay](#delaytime-scheduler)
-  - [distinct](#distinct)
-  - [distinctUntilChanged](#distinctuntilchangedcomparator)
-  - [elementAt](#elementatindex)
-  - [filter](#filterpredicate)
-  - [find](#findpredicate)
-  - [first](#first)
-  - [flatMap](#flatmapcallback)
-  - [flatMapLatest](#flatmaplatestcallback)
-  - [flatten](#flatten)
-  - [ignoreElements](#ignoreelements)
-  - [last](#last)
-  - [map](#mapcallback)
-  - [max](#max)
-  - [merge](#mergesources)
-  - [min](#min)
-  - [pack](#pack)
-  - [partition](#partitionpredicate)
-  - [pluck](#pluckkeys)
-  - [reduce](#reduceaccumulator-seed)
-  - [reject](#rejectpredicate)
-  - [retry](#retrycount)
-  - [sample](#samplesampler)
-  - [scan](#scanaccumulator-seed)
-  - [skip](#skipn)
-  - [skipLast](#skiplastcount)
-  - [skipUntil](#skipuntilother)
-  - [skipWhile](#skipwhilepredicate)
-  - [startWith](#startwithvalues)
-  - [sum](#sum)
-  - [switch](#switch)
-  - [take](#taken)
-  - [takeLast](#takelastcount)
-  - [takeUntil](#takeuntilother)
-  - [takeWhile](#takewhilepredicate)
-  - [tap](#taponnext-onerror-oncompleted)
-  - [unpack](#unpack)
-  - [unwrap](#unwrap)
-  - [window](#windowsize)
-  - [with](#withsources)
-  - [zip](#zipsources)
-- [ImmediateScheduler](#immediatescheduler)
-  - [create](#create)
-  - [schedule](#scheduleaction)
+  - [create](#observable-create)
+  - [subscribe](#observable-subscribe)
+  - [empty](#observable-empty)
+  - [never](#observable-never)
+  - [throw](#observable-throw)
+  - [of](#observable-of)
+  - [fromRange](#observable-fromrange)
+  - [fromTable](#observable-fromtable)
+  - [fromCoroutine](#observable-fromcoroutine)
+  - [fromFileByLine](#observable-fromfilebyline)
+  - [defer](#observable-defer)
+  - [replicate](#observable-replicate)
+  - [dump](#observable-dump)
+  - [all](#observable-all)
+  - [amb](#observable-amb)
+  - [average](#observable-average)
+  - [buffer](#observable-buffer)
+  - [catch](#observable-catch)
+  - [combineLatest](#observable-combinelatest)
+  - [compact](#observable-compact)
+  - [concat](#observable-concat)
+  - [contains](#observable-contains)
+  - [count](#observable-count)
+  - [debounce](#observable-debounce)
+  - [defaultIfEmpty](#observable-defaultifempty)
+  - [delay](#observable-delay)
+  - [distinct](#observable-distinct)
+  - [distinctUntilChanged](#observable-distinctuntilchanged)
+  - [elementAt](#observable-elementat)
+  - [filter](#observable-filter)
+  - [find](#observable-find)
+  - [first](#observable-first)
+  - [flatMap](#observable-flatmap)
+  - [flatMapLatest](#observable-flatmaplatest)
+  - [flatten](#observable-flatten)
+  - [ignoreElements](#observable-ignoreelements)
+  - [last](#observable-last)
+  - [map](#observable-map)
+  - [max](#observable-max)
+  - [merge](#observable-merge)
+  - [min](#observable-min)
+  - [pack](#observable-pack)
+  - [partition](#observable-partition)
+  - [pluck](#observable-pluck)
+  - [reduce](#observable-reduce)
+  - [reject](#observable-reject)
+  - [retry](#observable-retry)
+  - [sample](#observable-sample)
+  - [scan](#observable-scan)
+  - [skip](#observable-skip)
+  - [skipLast](#observable-skiplast)
+  - [skipUntil](#observable-skipuntil)
+  - [skipWhile](#observable-skipwhile)
+  - [startWith](#observable-startwith)
+  - [sum](#observable-sum)
+  - [switch](#observable-switch)
+  - [take](#observable-take)
+  - [takeLast](#observable-takelast)
+  - [takeUntil](#observable-takeuntil)
+  - [takeWhile](#observable-takewhile)
+  - [tap](#observable-tap)
+  - [unpack](#observable-unpack)
+  - [unwrap](#observable-unwrap)
+  - [window](#observable-window)
+  - [with](#observable-with)
+  - [zip](#observable-zip)
+- [Observer](#observer)
+  - [create](#observer-create)
+  - [onNext](#observer-onnext)
+  - [onError](#observer-onerror)
+  - [onCompleted](#observer-oncompleted)
 - [CooperativeScheduler](#cooperativescheduler)
-  - [create](#createcurrenttime)
-  - [schedule](#scheduleaction-delay)
-  - [update](#updatedelta)
-  - [isEmpty](#isempty)
+  - [create](#cooperativescheduler-create)
+  - [schedule](#cooperativescheduler-schedule)
+  - [update](#cooperativescheduler-update)
+  - [isEmpty](#cooperativescheduler-isempty)
+- [ImmediateScheduler](#immediatescheduler)
+  - [create](#immediatescheduler-create)
+  - [schedule](#immediatescheduler-schedule)
 - [TimeoutScheduler](#timeoutscheduler)
-  - [create](#create)
-  - [schedule](#scheduleaction-delay)
-- [Subject](#subject)
-  - [create](#create)
-  - [subscribe](#subscribeonnext-onerror-oncompleted)
-  - [onNext](#onnextvalues)
-  - [onError](#onerrormessage)
-  - [onCompleted](#oncompleted)
+  - [create](#timeoutscheduler-create)
+  - [schedule](#timeoutscheduler-schedule)
 - [AsyncSubject](#asyncsubject)
-  - [create](#create)
-  - [subscribe](#subscribeonnext-onerror-oncompleted)
-  - [onNext](#onnextvalues)
-  - [onError](#onerrormessage)
-  - [onCompleted](#oncompleted)
+  - [create](#asyncsubject-create)
+  - [subscribe](#asyncsubject-subscribe)
+  - [onNext](#asyncsubject-onnext)
+  - [onError](#asyncsubject-onerror)
+  - [onCompleted](#asyncsubject-oncompleted)
 - [BehaviorSubject](#behaviorsubject)
-  - [create](#createvalue)
-  - [subscribe](#subscribeonnext-onerror-oncompleted)
-  - [onNext](#onnextvalues)
-  - [getValue](#getvalue)
+  - [create](#behaviorsubject-create)
+  - [subscribe](#behaviorsubject-subscribe)
+  - [onNext](#behaviorsubject-onnext)
+  - [getValue](#behaviorsubject-getvalue)
 - [ReplaySubject](#replaysubject)
-  - [create](#createbuffersize)
-  - [subscribe](#subscribeonnext-onerror-oncompleted)
-  - [onNext](#onnextvalues)
-
-# Subscription
-
-A handle representing the link between an Observer and an Observable, as well as any work required to clean up after the Observable completes or the Observer unsubscribes.
-
----
-
-#### `.create(action)`
-
-Creates a new Subscription.
-
-| Name | Type | Default | Description |
-|------|------|---------|-------------|
-| `action` | function (optional) |  | The action to run when the subscription is unsubscribed. It will only be run once. |
-
----
-
-#### `:unsubscribe()`
-
-Unsubscribes the subscription, performing any necessary cleanup work.
-
-# Observer
-
-Observers are simple objects that receive values from Observables.
-
----
-
-#### `.create(onNext, onError, onCompleted)`
-
-Creates a new Observer.
-
-| Name | Type | Default | Description |
-|------|------|---------|-------------|
-| `onNext` | function (optional) |  | Called when the Observable produces a value. |
-| `onError` | function (optional) |  | Called when the Observable terminates due to an error. |
-| `onCompleted` | function (optional) |  | Called when the Observable completes normally. |
-
----
-
-#### `:onNext(values)`
-
-Pushes zero or more values to the Observer.
-
-| Name | Type | Default | Description |
-|------|------|---------|-------------|
-| `values` | *... |  |  |
-
----
-
-#### `:onError(message)`
-
-Notify the Observer that an error has occurred.
-
-| Name | Type | Default | Description |
-|------|------|---------|-------------|
-| `message` | string (optional) |  | A string describing what went wrong. |
-
----
-
-#### `:onCompleted()`
-
-Notify the Observer that the sequence has completed and will produce no more values.
+  - [create](#replaysubject-create)
+  - [subscribe](#replaysubject-subscribe)
+  - [onNext](#replaysubject-onnext)
+- [Subject](#subject)
+  - [create](#subject-create)
+  - [subscribe](#subject-subscribe)
+  - [onNext](#subject-onnext)
+  - [onError](#subject-onerror)
+  - [onCompleted](#subject-oncompleted)
+  - [create](#subject-create)
+- [Subscription](#subscription)
+  - [create](#subscription-create)
+  - [unsubscribe](#subscription-unsubscribe)
 
 # Observable
 
@@ -177,46 +115,52 @@ Observables push values to Observers.
 
 ---
 
+<a name="observable-create"></a>
 #### `.create(subscribe)`
 
-Creates a new Observable.
+Creates a new Observable. Please not that the Observable does not do any work right after creation, but only after calling a `subscribe` on it.
 
 | Name | Type | Default | Description |
 |------|------|---------|-------------|
-| `subscribe` | function |  | The subscription function that produces values. |
+| `subscribe` | function |  | The subscription function that produces values. It is called when the Observable  is initially subscribed to. This function is given an Observer, to which new values can be `onNext`ed, or an `onError` method can be called to raise an error, or `onCompleted` can be called to notify of a successful completion. |
 
 ---
 
+<a name="observable-subscribe"></a>
 #### `:subscribe(onNext, onError, onCompleted)`
 
-Shorthand for creating an Observer and passing it to this Observable's subscription function.
+Invokes an execution of an Observable and registers Observer handlers for notifications it will emit.
 
 | Name | Type | Default | Description |
 |------|------|---------|-------------|
-| `onNext` | function |  | Called when the Observable produces a value. |
+| `onNext` | function or Observer |  | Called when the Observable produces a value. |
 | `onError` | function |  | Called when the Observable terminates due to an error. |
 | `onCompleted` | function |  | Called when the Observable completes normally. |
 
 ---
 
+<a name="observable-empty"></a>
 #### `.empty()`
 
 Returns an Observable that immediately completes without producing a value.
 
 ---
 
+<a name="observable-never"></a>
 #### `.never()`
 
 Returns an Observable that never produces values and never completes.
 
 ---
 
+<a name="observable-throw"></a>
 #### `.throw(message)`
 
 Returns an Observable that immediately produces an error.
 
 ---
 
+<a name="observable-of"></a>
 #### `.of(values)`
 
 Creates an Observable that produces a set of values.
@@ -227,6 +171,7 @@ Creates an Observable that produces a set of values.
 
 ---
 
+<a name="observable-fromrange"></a>
 #### `.fromRange(initial, limit, step)`
 
 Creates an Observable that produces a range of values in a manner similar to a Lua for loop.
@@ -239,6 +184,7 @@ Creates an Observable that produces a range of values in a manner similar to a L
 
 ---
 
+<a name="observable-fromtable"></a>
 #### `.fromTable(table, iterator, keys)`
 
 Creates an Observable that produces values from a table.
@@ -251,6 +197,7 @@ Creates an Observable that produces values from a table.
 
 ---
 
+<a name="observable-fromcoroutine"></a>
 #### `.fromCoroutine(fn)`
 
 Creates an Observable that produces values when the specified coroutine yields.
@@ -261,6 +208,7 @@ Creates an Observable that produces values when the specified coroutine yields.
 
 ---
 
+<a name="observable-fromfilebyline"></a>
 #### `.fromFileByLine(filename)`
 
 Creates an Observable that produces values from a file, line by line.
@@ -271,6 +219,7 @@ Creates an Observable that produces values from a file, line by line.
 
 ---
 
+<a name="observable-defer"></a>
 #### `.defer(factory)`
 
 Creates an Observable that creates a new Observable for each observer using a factory function.
@@ -281,6 +230,7 @@ Creates an Observable that creates a new Observable for each observer using a fa
 
 ---
 
+<a name="observable-replicate"></a>
 #### `.replicate(value, count)`
 
 Returns an Observable that repeats a value a specified number of times.
@@ -292,6 +242,7 @@ Returns an Observable that repeats a value a specified number of times.
 
 ---
 
+<a name="observable-dump"></a>
 #### `:dump(name, formatter)`
 
 Subscribes to this Observable and prints values it produces.
@@ -303,6 +254,7 @@ Subscribes to this Observable and prints values it produces.
 
 ---
 
+<a name="observable-all"></a>
 #### `:all(predicate)`
 
 Determine whether all items emitted by an Observable meet some criteria.
@@ -313,6 +265,7 @@ Determine whether all items emitted by an Observable meet some criteria.
 
 ---
 
+<a name="observable-amb"></a>
 #### `.amb(observables)`
 
 Given a set of Observables, produces values from only the first one to produce a value.
@@ -323,12 +276,14 @@ Given a set of Observables, produces values from only the first one to produce a
 
 ---
 
+<a name="observable-average"></a>
 #### `:average()`
 
 Returns an Observable that produces the average of all values produced by the original.
 
 ---
 
+<a name="observable-buffer"></a>
 #### `:buffer(size)`
 
 Returns an Observable that buffers values from the original and produces them as multiple values.
@@ -339,6 +294,7 @@ Returns an Observable that buffers values from the original and produces them as
 
 ---
 
+<a name="observable-catch"></a>
 #### `:catch(handler)`
 
 Returns an Observable that intercepts any errors from the previous and replace them with values produced by a new Observable.
@@ -349,6 +305,7 @@ Returns an Observable that intercepts any errors from the previous and replace t
 
 ---
 
+<a name="observable-combinelatest"></a>
 #### `:combineLatest(observables, combinator)`
 
 Returns a new Observable that runs a combinator function on the most recent values from a set of Observables whenever any of them produce a new value. The results of the combinator function are produced by the new Observable.
@@ -360,12 +317,14 @@ Returns a new Observable that runs a combinator function on the most recent valu
 
 ---
 
+<a name="observable-compact"></a>
 #### `:compact()`
 
 Returns a new Observable that produces the values of the first with falsy values removed.
 
 ---
 
+<a name="observable-concat"></a>
 #### `:concat(sources)`
 
 Returns a new Observable that produces the values produced by all the specified Observables in the order they are specified.
@@ -376,6 +335,7 @@ Returns a new Observable that produces the values produced by all the specified 
 
 ---
 
+<a name="observable-contains"></a>
 #### `:contains(value)`
 
 Returns a new Observable that produces a single boolean value representing whether or not the specified value was produced by the original.
@@ -386,6 +346,7 @@ Returns a new Observable that produces a single boolean value representing wheth
 
 ---
 
+<a name="observable-count"></a>
 #### `:count(predicate)`
 
 Returns an Observable that produces a single value representing the number of values produced by the source value that satisfy an optional predicate.
@@ -396,6 +357,7 @@ Returns an Observable that produces a single value representing the number of va
 
 ---
 
+<a name="observable-debounce"></a>
 #### `:debounce(time, scheduler)`
 
 Returns a new throttled Observable that waits to produce values until a timeout has expired, at which point it produces the latest value from the source Observable.  Whenever the source Observable produces a value, the timeout is reset.
@@ -407,6 +369,7 @@ Returns a new throttled Observable that waits to produce values until a timeout 
 
 ---
 
+<a name="observable-defaultifempty"></a>
 #### `:defaultIfEmpty(values)`
 
 Returns a new Observable that produces a default set of items if the source Observable produces no values.
@@ -417,6 +380,7 @@ Returns a new Observable that produces a default set of items if the source Obse
 
 ---
 
+<a name="observable-delay"></a>
 #### `:delay(time, scheduler)`
 
 Returns a new Observable that produces the values of the original delayed by a time period.
@@ -428,12 +392,14 @@ Returns a new Observable that produces the values of the original delayed by a t
 
 ---
 
+<a name="observable-distinct"></a>
 #### `:distinct()`
 
 Returns a new Observable that produces the values from the original with duplicates removed.
 
 ---
 
+<a name="observable-distinctuntilchanged"></a>
 #### `:distinctUntilChanged(comparator)`
 
 Returns an Observable that only produces values from the original if they are different from the previous value.
@@ -444,6 +410,7 @@ Returns an Observable that only produces values from the original if they are di
 
 ---
 
+<a name="observable-elementat"></a>
 #### `:elementAt(index)`
 
 Returns an Observable that produces the nth element produced by the source Observable.
@@ -454,6 +421,7 @@ Returns an Observable that produces the nth element produced by the source Obser
 
 ---
 
+<a name="observable-filter"></a>
 #### `:filter(predicate)`
 
 Returns a new Observable that only produces values of the first that satisfy a predicate.
@@ -464,6 +432,7 @@ Returns a new Observable that only produces values of the first that satisfy a p
 
 ---
 
+<a name="observable-find"></a>
 #### `:find(predicate)`
 
 Returns a new Observable that produces the first value of the original that satisfies a predicate.
@@ -474,12 +443,14 @@ Returns a new Observable that produces the first value of the original that sati
 
 ---
 
+<a name="observable-first"></a>
 #### `:first()`
 
 Returns a new Observable that only produces the first result of the original.
 
 ---
 
+<a name="observable-flatmap"></a>
 #### `:flatMap(callback)`
 
 Returns a new Observable that transform the items emitted by an Observable into Observables, then flatten the emissions from those into a single Observable
@@ -490,6 +461,7 @@ Returns a new Observable that transform the items emitted by an Observable into 
 
 ---
 
+<a name="observable-flatmaplatest"></a>
 #### `:flatMapLatest(callback)`
 
 Returns a new Observable that uses a callback to create Observables from the values produced by the source, then produces values from the most recent of these Observables.
@@ -500,24 +472,28 @@ Returns a new Observable that uses a callback to create Observables from the val
 
 ---
 
+<a name="observable-flatten"></a>
 #### `:flatten()`
 
 Returns a new Observable that subscribes to the Observables produced by the original and produces their values.
 
 ---
 
+<a name="observable-ignoreelements"></a>
 #### `:ignoreElements()`
 
 Returns an Observable that terminates when the source terminates but does not produce any elements.
 
 ---
 
+<a name="observable-last"></a>
 #### `:last()`
 
 Returns a new Observable that only produces the last result of the original.
 
 ---
 
+<a name="observable-map"></a>
 #### `:map(callback)`
 
 Returns a new Observable that produces the values of the original transformed by a function.
@@ -528,12 +504,14 @@ Returns a new Observable that produces the values of the original transformed by
 
 ---
 
+<a name="observable-max"></a>
 #### `:max()`
 
 Returns a new Observable that produces the maximum value produced by the original.
 
 ---
 
+<a name="observable-merge"></a>
 #### `:merge(sources)`
 
 Returns a new Observable that produces the values produced by all the specified Observables in the order they are produced.
@@ -544,18 +522,21 @@ Returns a new Observable that produces the values produced by all the specified 
 
 ---
 
+<a name="observable-min"></a>
 #### `:min()`
 
 Returns a new Observable that produces the minimum value produced by the original.
 
 ---
 
+<a name="observable-pack"></a>
 #### `:pack()`
 
 Returns an Observable that produces the values of the original inside tables.
 
 ---
 
+<a name="observable-partition"></a>
 #### `:partition(predicate)`
 
 Returns two Observables: one that produces values for which the predicate returns truthy for, and another that produces values for which the predicate returns falsy.
@@ -566,6 +547,7 @@ Returns two Observables: one that produces values for which the predicate return
 
 ---
 
+<a name="observable-pluck"></a>
 #### `:pluck(keys)`
 
 Returns a new Observable that produces values computed by extracting the given keys from the tables produced by the original.
@@ -576,6 +558,7 @@ Returns a new Observable that produces values computed by extracting the given k
 
 ---
 
+<a name="observable-reduce"></a>
 #### `:reduce(accumulator, seed)`
 
 Returns a new Observable that produces a single value computed by accumulating the results of running a function on each value produced by the original Observable.
@@ -587,6 +570,7 @@ Returns a new Observable that produces a single value computed by accumulating t
 
 ---
 
+<a name="observable-reject"></a>
 #### `:reject(predicate)`
 
 Returns a new Observable that produces values from the original which do not satisfy a predicate.
@@ -597,6 +581,7 @@ Returns a new Observable that produces values from the original which do not sat
 
 ---
 
+<a name="observable-retry"></a>
 #### `:retry(count)`
 
 Returns an Observable that restarts in the event of an error.
@@ -607,6 +592,7 @@ Returns an Observable that restarts in the event of an error.
 
 ---
 
+<a name="observable-sample"></a>
 #### `:sample(sampler)`
 
 Returns a new Observable that produces its most recent value every time the specified observable produces a value.
@@ -617,6 +603,7 @@ Returns a new Observable that produces its most recent value every time the spec
 
 ---
 
+<a name="observable-scan"></a>
 #### `:scan(accumulator, seed)`
 
 Returns a new Observable that produces values computed by accumulating the results of running a function on each value produced by the original Observable.
@@ -628,6 +615,7 @@ Returns a new Observable that produces values computed by accumulating the resul
 
 ---
 
+<a name="observable-skip"></a>
 #### `:skip(n)`
 
 Returns a new Observable that skips over a specified number of values produced by the original and produces the rest.
@@ -638,6 +626,7 @@ Returns a new Observable that skips over a specified number of values produced b
 
 ---
 
+<a name="observable-skiplast"></a>
 #### `:skipLast(count)`
 
 Returns an Observable that omits a specified number of values from the end of the original Observable.
@@ -648,6 +637,7 @@ Returns an Observable that omits a specified number of values from the end of th
 
 ---
 
+<a name="observable-skipuntil"></a>
 #### `:skipUntil(other)`
 
 Returns a new Observable that skips over values produced by the original until the specified Observable produces a value.
@@ -658,6 +648,7 @@ Returns a new Observable that skips over values produced by the original until t
 
 ---
 
+<a name="observable-skipwhile"></a>
 #### `:skipWhile(predicate)`
 
 Returns a new Observable that skips elements until the predicate returns falsy for one of them.
@@ -668,6 +659,7 @@ Returns a new Observable that skips elements until the predicate returns falsy f
 
 ---
 
+<a name="observable-startwith"></a>
 #### `:startWith(values)`
 
 Returns a new Observable that produces the specified values followed by all elements produced by the source Observable.
@@ -678,18 +670,21 @@ Returns a new Observable that produces the specified values followed by all elem
 
 ---
 
+<a name="observable-sum"></a>
 #### `:sum()`
 
 Returns an Observable that produces a single value representing the sum of the values produced by the original.
 
 ---
 
+<a name="observable-switch"></a>
 #### `:switch()`
 
 Given an Observable that produces Observables, returns an Observable that produces the values produced by the most recently produced Observable.
 
 ---
 
+<a name="observable-take"></a>
 #### `:take(n)`
 
 Returns a new Observable that only produces the first n results of the original.
@@ -700,6 +695,7 @@ Returns a new Observable that only produces the first n results of the original.
 
 ---
 
+<a name="observable-takelast"></a>
 #### `:takeLast(count)`
 
 Returns an Observable that produces a specified number of elements from the end of a source Observable.
@@ -710,6 +706,7 @@ Returns an Observable that produces a specified number of elements from the end 
 
 ---
 
+<a name="observable-takeuntil"></a>
 #### `:takeUntil(other)`
 
 Returns a new Observable that completes when the specified Observable fires.
@@ -720,6 +717,7 @@ Returns a new Observable that completes when the specified Observable fires.
 
 ---
 
+<a name="observable-takewhile"></a>
 #### `:takeWhile(predicate)`
 
 Returns a new Observable that produces elements until the predicate returns falsy.
@@ -730,6 +728,7 @@ Returns a new Observable that produces elements until the predicate returns fals
 
 ---
 
+<a name="observable-tap"></a>
 #### `:tap(onNext, onError, onCompleted)`
 
 Runs a function each time this Observable has activity. Similar to subscribe but does not create a subscription.
@@ -742,18 +741,21 @@ Runs a function each time this Observable has activity. Similar to subscribe but
 
 ---
 
+<a name="observable-unpack"></a>
 #### `:unpack()`
 
 Returns an Observable that unpacks the tables produced by the original.
 
 ---
 
+<a name="observable-unwrap"></a>
 #### `:unwrap()`
 
 Returns an Observable that takes any values produced by the original that consist of multiple return values and produces each value individually.
 
 ---
 
+<a name="observable-window"></a>
 #### `:window(size)`
 
 Returns an Observable that produces a sliding window of the values produced by the original.
@@ -764,6 +766,7 @@ Returns an Observable that produces a sliding window of the values produced by t
 
 ---
 
+<a name="observable-with"></a>
 #### `:with(sources)`
 
 Returns an Observable that produces values from the original along with the most recently produced value from all other specified Observables. Note that only the first argument from each source Observable is used.
@@ -774,6 +777,7 @@ Returns an Observable that produces values from the original along with the most
 
 ---
 
+<a name="observable-zip"></a>
 #### `.zip(sources)`
 
 Returns an Observable that merges the values produced by the source Observables by grouping them by their index.  The first onNext event contains the first value of all of the sources, the second onNext event contains the second value of all of the sources, and so on.  onNext is called a number of times equal to the number of values produced by the Observable that produces the fewest number of values.
@@ -782,25 +786,51 @@ Returns an Observable that merges the values produced by the source Observables 
 |------|------|---------|-------------|
 | `sources` | Observable... |  | The Observables to zip. |
 
-# ImmediateScheduler
+# Observer
 
-Schedules Observables by running all operations immediately.
-
----
-
-#### `.create()`
-
-Creates a new ImmediateScheduler.
+Observers are simple objects that receive values from Observables.
 
 ---
 
-#### `:schedule(action)`
+<a name="observer-create"></a>
+#### `.create(onNext, onError, onCompleted)`
 
-Schedules a function to be run on the scheduler. It is executed immediately.
+Creates a new Observer.
 
 | Name | Type | Default | Description |
 |------|------|---------|-------------|
-| `action` | function |  | The function to execute. |
+| `onNext` | function (optional) |  | Called when the Observable produces a value. |
+| `onError` | function (optional) |  | Called when the Observable terminates due to an error. |
+| `onCompleted` | function (optional) |  | Called when the Observable completes normally. |
+
+---
+
+<a name="observer-onnext"></a>
+#### `:onNext(values)`
+
+Pushes zero or more values to the Observer.
+
+| Name | Type | Default | Description |
+|------|------|---------|-------------|
+| `values` | *... |  |  |
+
+---
+
+<a name="observer-onerror"></a>
+#### `:onError(message)`
+
+Notify the Observer that an error has occurred.
+
+| Name | Type | Default | Description |
+|------|------|---------|-------------|
+| `message` | string (optional) |  | A string describing what went wrong. |
+
+---
+
+<a name="observer-oncompleted"></a>
+#### `:onCompleted()`
+
+Notify the Observer that the sequence has completed and will produce no more values.
 
 # CooperativeScheduler
 
@@ -808,6 +838,7 @@ Manages Observables using coroutines and a virtual clock that must be updated ma
 
 ---
 
+<a name="cooperativescheduler-create"></a>
 #### `.create(currentTime)`
 
 Creates a new CooperativeScheduler.
@@ -818,6 +849,7 @@ Creates a new CooperativeScheduler.
 
 ---
 
+<a name="cooperativescheduler-schedule"></a>
 #### `:schedule(action, delay)`
 
 Schedules a function to be run after an optional delay.  Returns a subscription that will stop the action from running.
@@ -829,6 +861,7 @@ Schedules a function to be run after an optional delay.  Returns a subscription 
 
 ---
 
+<a name="cooperativescheduler-update"></a>
 #### `:update(delta)`
 
 Triggers an update of the CooperativeScheduler. The clock will be advanced and the scheduler will run any coroutines that are due to be run.
@@ -839,9 +872,32 @@ Triggers an update of the CooperativeScheduler. The clock will be advanced and t
 
 ---
 
+<a name="cooperativescheduler-isempty"></a>
 #### `:isEmpty()`
 
 Returns whether or not the CooperativeScheduler's queue is empty.
+
+# ImmediateScheduler
+
+Schedules Observables by running all operations immediately.
+
+---
+
+<a name="immediatescheduler-create"></a>
+#### `.create()`
+
+Creates a new ImmediateScheduler.
+
+---
+
+<a name="immediatescheduler-schedule"></a>
+#### `:schedule(action)`
+
+Schedules a function to be run on the scheduler. It is executed immediately.
+
+| Name | Type | Default | Description |
+|------|------|---------|-------------|
+| `action` | function |  | The function to execute. |
 
 # TimeoutScheduler
 
@@ -849,12 +905,14 @@ A scheduler that uses luvit's timer library to schedule events on an event loop.
 
 ---
 
+<a name="timeoutscheduler-create"></a>
 #### `.create()`
 
 Creates a new TimeoutScheduler.
 
 ---
 
+<a name="timeoutscheduler-schedule"></a>
 #### `:schedule(action, delay)`
 
 Schedules an action to run at a future point in time.
@@ -864,66 +922,20 @@ Schedules an action to run at a future point in time.
 | `action` | function |  | The action to run. |
 | `delay` | number (optional) | 0 | The delay, in milliseconds. |
 
-# Subject
-
-Subjects function both as an Observer and as an Observable. Subjects inherit all Observable functions, including subscribe. Values can also be pushed to the Subject, which will be broadcasted to any subscribed Observers.
-
----
-
-#### `.create()`
-
-Creates a new Subject.
-
----
-
-#### `:subscribe(onNext, onError, onCompleted)`
-
-Creates a new Observer and attaches it to the Subject.
-
-| Name | Type | Default | Description |
-|------|------|---------|-------------|
-| `onNext` | function or table |  | A function called when the Subject produces a value or an existing Observer to attach to the Subject. |
-| `onError` | function |  | Called when the Subject terminates due to an error. |
-| `onCompleted` | function |  | Called when the Subject completes normally. |
-
----
-
-#### `:onNext(values)`
-
-Pushes zero or more values to the Subject. They will be broadcasted to all Observers.
-
-| Name | Type | Default | Description |
-|------|------|---------|-------------|
-| `values` | *... |  |  |
-
----
-
-#### `:onError(message)`
-
-Signal to all Observers that an error has occurred.
-
-| Name | Type | Default | Description |
-|------|------|---------|-------------|
-| `message` | string (optional) |  | A string describing what went wrong. |
-
----
-
-#### `:onCompleted()`
-
-Signal to all Observers that the Subject will not produce any more values.
-
 # AsyncSubject
 
 AsyncSubjects are subjects that produce either no values or a single value.  If multiple values are produced via onNext, only the last one is used.  If onError is called, then no value is produced and onError is called on any subscribed Observers.  If an Observer subscribes and the AsyncSubject has already terminated, the Observer will immediately receive the value or the error.
 
 ---
 
+<a name="asyncsubject-create"></a>
 #### `.create()`
 
 Creates a new AsyncSubject.
 
 ---
 
+<a name="asyncsubject-subscribe"></a>
 #### `:subscribe(onNext, onError, onCompleted)`
 
 Creates a new Observer and attaches it to the AsyncSubject.
@@ -936,6 +948,7 @@ Creates a new Observer and attaches it to the AsyncSubject.
 
 ---
 
+<a name="asyncsubject-onnext"></a>
 #### `:onNext(values)`
 
 Pushes zero or more values to the AsyncSubject.
@@ -946,6 +959,7 @@ Pushes zero or more values to the AsyncSubject.
 
 ---
 
+<a name="asyncsubject-onerror"></a>
 #### `:onError(message)`
 
 Signal to all Observers that an error has occurred.
@@ -956,6 +970,7 @@ Signal to all Observers that an error has occurred.
 
 ---
 
+<a name="asyncsubject-oncompleted"></a>
 #### `:onCompleted()`
 
 Signal to all Observers that the AsyncSubject will not produce any more values.
@@ -966,6 +981,7 @@ A Subject that tracks its current value. Provides an accessor to retrieve the mo
 
 ---
 
+<a name="behaviorsubject-create"></a>
 #### `.create(value)`
 
 Creates a new BehaviorSubject.
@@ -976,6 +992,7 @@ Creates a new BehaviorSubject.
 
 ---
 
+<a name="behaviorsubject-subscribe"></a>
 #### `:subscribe(onNext, onError, onCompleted)`
 
 Creates a new Observer and attaches it to the BehaviorSubject. Immediately broadcasts the most recent value to the Observer.
@@ -988,6 +1005,7 @@ Creates a new Observer and attaches it to the BehaviorSubject. Immediately broad
 
 ---
 
+<a name="behaviorsubject-onnext"></a>
 #### `:onNext(values)`
 
 Pushes zero or more values to the BehaviorSubject. They will be broadcasted to all Observers.
@@ -998,6 +1016,7 @@ Pushes zero or more values to the BehaviorSubject. They will be broadcasted to a
 
 ---
 
+<a name="behaviorsubject-getvalue"></a>
 #### `:getValue()`
 
 Returns the last value emitted by the BehaviorSubject, or the initial value passed to the constructor if nothing has been emitted yet.
@@ -1008,6 +1027,7 @@ A Subject that provides new Subscribers with some or all of the most recently pr
 
 ---
 
+<a name="replaysubject-create"></a>
 #### `.create(bufferSize)`
 
 Creates a new ReplaySubject.
@@ -1018,6 +1038,7 @@ Creates a new ReplaySubject.
 
 ---
 
+<a name="replaysubject-subscribe"></a>
 #### `:subscribe(onNext, onError, onCompleted)`
 
 Creates a new Observer and attaches it to the ReplaySubject. Immediately broadcasts the most contents of the buffer to the Observer.
@@ -1030,6 +1051,7 @@ Creates a new Observer and attaches it to the ReplaySubject. Immediately broadca
 
 ---
 
+<a name="replaysubject-onnext"></a>
 #### `:onNext(values)`
 
 Pushes zero or more values to the ReplaySubject. They will be broadcasted to all Observers.
@@ -1037,4 +1059,90 @@ Pushes zero or more values to the ReplaySubject. They will be broadcasted to all
 | Name | Type | Default | Description |
 |------|------|---------|-------------|
 | `values` | *... |  |  |
+
+# Subject
+
+Subjects function both as an Observer and as an Observable. Subjects inherit all Observable functions, including subscribe. Values can also be pushed to the Subject, which will be broadcasted to any subscribed Observers.
+
+---
+
+<a name="subject-create"></a>
+#### `.create()`
+
+Creates a new Subject.
+
+---
+
+<a name="subject-subscribe"></a>
+#### `:subscribe(onNext, onError, onCompleted) end`
+
+Creates a new Observer or uses the exxisting one, and registers Observer handlers for notifications the Subject will emit.
+
+| Name | Type | Default | Description |
+|------|------|---------|-------------|
+| `onNext` | function or Observer |  | Called when the Observable produces a value. |
+| `onError` | function |  | Called when the Observable terminates due to an error. |
+| `onCompleted` | function |  | Called when the Observable completes normally. |
+
+---
+
+<a name="subject-onnext"></a>
+#### `:onNext(values)`
+
+Pushes zero or more values to the Subject. They will be broadcasted to all Observers.
+
+| Name | Type | Default | Description |
+|------|------|---------|-------------|
+| `values` | *... |  |  |
+
+---
+
+<a name="subject-onerror"></a>
+#### `:onError(message)`
+
+Signal to all Observers that an error has occurred.
+
+| Name | Type | Default | Description |
+|------|------|---------|-------------|
+| `message` | string (optional) |  | A string describing what went wrong. |
+
+---
+
+<a name="subject-oncompleted"></a>
+#### `:onCompleted()`
+
+Signal to all Observers that the Subject will not produce any more values.
+
+---
+
+<a name="subject-create"></a>
+#### `.create(subject)`
+
+Creates a new SubjectSubscription.
+
+| Name | Type | Default | Description |
+|------|------|---------|-------------|
+| `subject` | Subject |  | The action to run when the subscription is unsubscribed. It will only be run once. |
+
+# Subscription
+
+A handle representing the link between an Observer and an Observable, as well as any work required to clean up after the Observable completes or the Observer unsubscribes.
+
+---
+
+<a name="subscription-create"></a>
+#### `.create(action)`
+
+Creates a new Subscription.
+
+| Name | Type | Default | Description |
+|------|------|---------|-------------|
+| `action` | function (optional) |  | The action to run when the subscription is unsubscribed. It will only be run once. |
+
+---
+
+<a name="subscription-unsubscribe"></a>
+#### `:unsubscribe()`
+
+Unsubscribes the subscription, performing any necessary cleanup work.
 

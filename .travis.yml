@@ -135,12 +135,16 @@ jobs:
       - source .hererocks/bin/activate
   - stage: release
     env:
+    before_install:
+      - true
     install: 
       - if test "$TRAVIS_BUILD_ID" != $(cat ~/cache/travis_build_id); then travis_terminate 1; fi
       - cp ~/cache/lua-reactivex-portable.zip .
       - cp ~/cache/lua-reactivex-portable-luvit.zip .
       - mv ~/cache ~/cache-discard
       - mkdir ~/cache # clear the cache
+    before_script:
+      - true
     script:
       - true
     deploy: &releases

@@ -105,7 +105,8 @@ jobs:
       - ls -la test-portable-luvit
       - cd test-portable
       - unzip lua-reactivex-portable.zip
-      - lua tests/runner.lua
+      # `require()` first to populate `package.preload` caches
+      - echo 'require("reactivex"); dofile("tests/runner.lua")' | lua -
       - cd ../test-portable-luvit
       - unzip lua-reactivex-portable-luvit.zip
       # emulate luvit environment with global `exports` table

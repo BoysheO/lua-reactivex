@@ -30,8 +30,6 @@ end
 -- @returns {Observable} a new observable chained with the source observable
 function Observable:lift(createObserver)
   local this = self
-  local createObserver = createObserver
-
   return Observable.create(function (observer)
     return this:subscribe(createObserver(observer))
   end)

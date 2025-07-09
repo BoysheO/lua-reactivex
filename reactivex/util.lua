@@ -69,4 +69,10 @@ util.tryWithObserver = function(observer, fn, ...)
   return success, result
 end
 
+function util:erNil(any)
+  if any == nil then
+    error("Expect non nil value,but got nil")
+  end
+end
+
 return util
